@@ -10,16 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Check files"
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "LICENSE, README.md, example, CHANGELOG.md"
-
-      - name: File exists
-          if: steps.check_files.outputs.files_exists == 'true'
-          # Only runs if all of the files exists
-          run: echo All files exists!
-
       - name: Checkout 🛎️
         uses: actions/checkout@v2
 
