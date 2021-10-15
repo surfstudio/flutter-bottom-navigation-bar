@@ -21,16 +21,16 @@ typedef NavElementBuilder = Widget Function(bool isSelected);
 
 /// Bottom navigation bar widget.
 class BottomNavBar extends StatefulWidget {
+  final BottomNavTabType initType;
+  final Map<BottomNavTabType, NavElementBuilder> elements;
+  final StreamController<BottomNavTabType> selectedController;
+
   const BottomNavBar({
     required this.selectedController,
     required this.initType,
     required this.elements,
     Key? key,
   }) : super(key: key);
-
-  final BottomNavTabType initType;
-  final Map<BottomNavTabType, NavElementBuilder> elements;
-  final StreamController<BottomNavTabType> selectedController;
 
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
@@ -61,6 +61,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
     ]);
   }
 
+  @override
+  void dispose() {
+    _outerSubscription.cancel();
+
+    super.dispose();
+  }
+
   void _onSelectedChanged(BottomNavTabType event) {
     if (event != _currentType) {
       setState(() {
@@ -76,12 +83,5 @@ class _BottomNavBarState extends State<BottomNavBar> {
         widget.selectedController.sink.add(newSelected);
       });
     }
-  }
-
-  @override
-  void dispose() {
-    _outerSubscription.cancel();
-
-    super.dispose();
   }
 }
