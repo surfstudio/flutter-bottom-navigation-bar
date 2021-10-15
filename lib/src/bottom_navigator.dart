@@ -53,7 +53,9 @@ class BottomNavigator extends StatefulWidget {
   @override
   _BaseBottomNavigatorState createState() =>
       // ignore: no_logic_in_create_state
-      bottomNavBar == null ? _BottomNavigatorState() : _CustomBottomNavigatorState();
+      bottomNavBar == null
+          ? _BottomNavigatorState()
+          : _CustomBottomNavigatorState();
 }
 
 class _CustomBottomNavigatorState extends _BaseBottomNavigatorState {
@@ -64,7 +66,8 @@ class _CustomBottomNavigatorState extends _BaseBottomNavigatorState {
 
   @override
   StreamController<BottomNavTabType> initSelectController() {
-    return widget.selectController ?? StreamController<BottomNavTabType>.broadcast();
+    return widget.selectController ??
+        StreamController<BottomNavTabType>.broadcast();
   }
 
   @override
@@ -83,7 +86,8 @@ class _BottomNavigatorState extends _BaseBottomNavigatorState {
     super.initState();
 
     widget.tabsMap.forEach((tabType, relationship) {
-      _bottomMap.addEntries([MapEntry(tabType, relationship.navElementBuilder)]);
+      _bottomMap
+          .addEntries([MapEntry(tabType, relationship.navElementBuilder)]);
     });
   }
 
