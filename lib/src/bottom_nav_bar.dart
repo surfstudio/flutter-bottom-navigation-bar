@@ -45,8 +45,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     super.initState();
 
     _currentType = widget.initType;
-    _outerSubscription =
-        widget.selectedController.stream.listen(_onSelectedChanged);
+    _outerSubscription = widget.selectedController.stream.listen(_onSelectedChanged);
   }
 
   @override
