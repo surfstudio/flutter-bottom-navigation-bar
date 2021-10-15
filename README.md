@@ -13,7 +13,7 @@ This package made by [Surf](https://surf.ru).
 
 Bottom navigation bar
 
-## Usage
+## Description
 
 Main classes:
 
@@ -21,6 +21,91 @@ Main classes:
 2. [Bottom navigator bar](lib/src/bottom_nav_bar.dart)
 3. [Type of tab](lib/src/bottom_nav_tab_type.dart)
 4. [Relation between item in bar and content](lib/src/bottom_navigation_relationship.dart)
+
+
+## Example
+
+The easiest interaction with the library is as follows:
+
+1. Initialize:
+
+    ```dart
+      final _selectorController = StreamController<BottomNavTabType>.broadcast();
+
+      late List<BottomNavTabType> _types;
+      late Map<BottomNavTabType, BottomNavigationRelationship> _map;
+
+      var _isCustom = true;
+
+      @override
+      void initState() {
+        super.initState();
+
+        _types = const [
+          BottomNavTabType(0),
+          BottomNavTabType(1),
+          BottomNavTabType(2),
+        ];
+
+        _map = {
+          _types[0]: BottomNavigationRelationship(
+            tabBuilder: () => _buildPage(const Color(0xFFFF0000)),
+            navElementBuilder: (isSelected) => _buildElement(
+              isSelected,
+              const Color(0x55FF0000),
+            ),
+          ),
+          _types[1]: BottomNavigationRelationship(
+            tabBuilder: () => _buildPage(const Color(0xFF00FF00)),
+            navElementBuilder: (isSelected) => _buildElement(
+              isSelected,
+              const Color(0x5500FF00),
+            ),
+          ),
+          _types[2]: BottomNavigationRelationship(
+            tabBuilder: () => _buildPage(const Color(0xFF0000FF)),
+            navElementBuilder: (isSelected) => _buildElement(
+              isSelected,
+              const Color(0x550000FF),
+            ),
+          ),
+        };
+
+        _selectorController.stream.listen((type) => print(type.value));
+      }
+    ```
+1. Display:
+
+    ```dart
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+          body: Container(
+            child:
+                _isCustom ? _buildBottomNavigator() : _buildCustomBottomNavigator(),
+          ),
+        );
+      }
+
+      BottomNavigator _buildBottomNavigator() {
+        return BottomNavigator(
+          key: UniqueKey(),
+          initialTab: _types[0],
+          tabsMap: _map,
+          selectController: _selectorController,
+        );
+      }
+
+      BottomNavigator _buildCustomBottomNavigator() {
+        return BottomNavigator.custom(
+          key: UniqueKey(),
+          tabsMap: _map,
+          initialTab: _types[0],
+          bottomNavBar: _buildNavBar(),
+          selectController: _selectorController,
+        );
+      }
+    ```
 
 ## BottomNavigator
 
