@@ -22,7 +22,6 @@ Main classes:
 3. [Type of tab](lib/src/bottom_nav_tab_type.dart)
 4. [Relation between item in bar and content](lib/src/bottom_navigation_relationship.dart)
 
-
 ## Example
 
 The easiest interaction with the library is as follows:
@@ -74,6 +73,7 @@ The easiest interaction with the library is as follows:
         _selectorController.stream.listen((type) => print(type.value));
       }
     ```
+    
 1. Display:
 
     ```dart
