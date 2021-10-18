@@ -73,7 +73,7 @@ The easiest interaction with the library is as follows:
         _selectorController.stream.listen((type) => print(type.value));
       }
     ```
-    
+
 1. Display:
 
     ```dart
