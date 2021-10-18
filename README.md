@@ -72,7 +72,7 @@ void initState() {
 
   _selectorController.stream.listen((type) => print(type.value));
 }
-    ```
+```
 
 1. Display:
 
