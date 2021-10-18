@@ -24,6 +24,12 @@ import 'package:tabnavigator/tabnavigator.dart';
 
 /// Widget that display element by item currently selected in bottom bar.
 class BottomNavigator extends StatefulWidget {
+  final Map<BottomNavTabType, BottomNavigationRelationship> tabsMap;
+  final BottomNavTabType initialTab;
+  final StreamController<BottomNavTabType>? selectController;
+
+  final BottomNavBar? bottomNavBar;
+
   const BottomNavigator({
     required this.tabsMap,
     required this.initialTab,
@@ -43,12 +49,6 @@ class BottomNavigator extends StatefulWidget {
     required this.selectController,
     Key? key,
   }) : super(key: key);
-
-  final Map<BottomNavTabType, BottomNavigationRelationship> tabsMap;
-  final BottomNavTabType initialTab;
-  final StreamController<BottomNavTabType>? selectController;
-
-  final BottomNavBar? bottomNavBar;
 
   @override
   _BaseBottomNavigatorState createState() =>
@@ -77,9 +77,9 @@ class _CustomBottomNavigatorState extends _BaseBottomNavigatorState {
 }
 
 class _BottomNavigatorState extends _BaseBottomNavigatorState {
-  bool _isControllerOwner = false;
-
   final _bottomMap = <BottomNavTabType, NavElementBuilder>{};
+
+  bool _isControllerOwner = false;
 
   @override
   void initState() {
@@ -121,10 +121,10 @@ class _BottomNavigatorState extends _BaseBottomNavigatorState {
 }
 
 abstract class _BaseBottomNavigatorState extends State<BottomNavigator> {
+  final _navigatorMap = <BottomNavTabType, TabBuilder>{};
+
   @protected
   late StreamController<BottomNavTabType> _selectController;
-
-  final _navigatorMap = <BottomNavTabType, TabBuilder>{};
 
   @override
   void initState() {
@@ -153,6 +153,13 @@ abstract class _BaseBottomNavigatorState extends State<BottomNavigator> {
     );
   }
 
+  @override
+  void dispose() {
+    closeSelectController();
+
+    super.dispose();
+  }
+
   @protected
   StreamController<BottomNavTabType> initSelectController();
 
@@ -161,11 +168,4 @@ abstract class _BaseBottomNavigatorState extends State<BottomNavigator> {
 
   @protected
   BottomNavBar buildBottomBar();
-
-  @override
-  void dispose() {
-    closeSelectController();
-
-    super.dispose();
-  }
 }
