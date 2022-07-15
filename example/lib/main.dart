@@ -36,11 +36,12 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  final String title;
+
   const MyHomePage({
     required this.title,
     Key? key,
   }) : super(key: key);
-  final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -100,6 +101,13 @@ class _MyHomePageState extends State<MyHomePage> {
             _isCustom ? _buildBottomNavigator() : _buildCustomBottomNavigator(),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _selectorController.close();
+
+    super.dispose();
   }
 
   BottomNavigator _buildBottomNavigator() {
@@ -203,12 +211,5 @@ class _MyHomePageState extends State<MyHomePage> {
       initType: _types[0],
       selectedController: _selectorController,
     );
-  }
-
-  @override
-  void dispose() {
-    _selectorController.close();
-
-    super.dispose();
   }
 }
