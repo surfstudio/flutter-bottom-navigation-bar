@@ -1,6 +1,6 @@
 # Bottom Navigation Bar
 
-[![Build Status](https://shields.io/github/workflow/status/surfstudio/SurfGear/build?logo=github&logoColor=white)](https://github.com/surfstudio/SurfGear/tree/main/packages/bottom_navigation_bar)
+[![Build Status](https://shields.io/github/actions/workflow/status/surfstudio/flutter-bottom-navigation-bar/workflow.yaml?logo=github&logoColor=white)](https://github.com/surfstudio/SurfGear/tree/main/packages/bottom_navigation_bar)
 [![Coverage Status](https://img.shields.io/codecov/c/github/surfstudio/SurfGear?flag=bottom_navigation_bar&logo=codecov&logoColor=white)](https://codecov.io/gh/surfstudio/SurfGear)
 [![Pub Version](https://img.shields.io/pub/v/bottom_navigation_bar?logo=dart&logoColor=white)](https://pub.dev/packages/bottom_navigation_bar)
 [![Pub Likes](https://badgen.net/pub/likes/bottom_navigation_bar)](https://pub.dev/packages/bottom_navigation_bar)
